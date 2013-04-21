@@ -1,0 +1,12 @@
+* FTumbler: Extensible Lists for Filesystems
+
+Tumblers are an idea from the mythical Xanadu project:
+
+http://en.wikipedia.org/wiki/Tumbler_(Project_Xanadu)
+
+This is an implementation of tumblers for filesystems using only the
+characters 0-9 and a-z.
+
+Early stage.  Undocumented but usable and tested.
+
+License: MIT
