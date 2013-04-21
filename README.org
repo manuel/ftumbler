@@ -34,41 +34,39 @@ Assume two strings T1 and T2 containing one or more of the characters
 "0" and "1", and not ending in "0", with T1 < T2.
 
 If the two strings are the same length or T2 is shorter than T1,
-adding "1" to T1 per Rule 1 or 2 will always yield a new string T
-greater than T1 (because T has T1 as prefix but is longer) and smaller
-than T2 (because T1 is smaller than T2, and T has T1 as unchanged
-prefix).
+adding "1" to T1 per Rule 1 or 2 will always yield a new string T, so that
+
+ * T is greater than T1 (because T has T1 as prefix but is longer), and
+ * T is smaller than T2 (because T1 is smaller than T2, and T has T1
+   as unchanged prefix).
 
 If T1 is shorter than T2, replacing the final "1" of T2 with "01" per
-Rule 3 will always yield a new string T greater than T1 (since T1 is
-shorter than T2, T2's final "1" does not influence comparison to T1)
-and smaller than T2 (because the penultimate "0" in T is smaller than
-the final "1" in T2 it is replacing).
+Rule 3 will always yield a new string T, so that
+
+ * T is greater than T1 (since T1 is shorter than T2, T2's final "1"
+   does not influence comparison to T1, so changing it in T cannot
+   make T equal to or smaller than T1), and
+ * T is smaller than T2 (because the penultimate "0" in T is smaller
+   than the final "1" in T2 it is replacing).
 
 *** Examples
 
 Example 1: T1 and T2 are the same length, so we add "1" to T1 per Rule
 1:
 
-#+begin_example
-T1: 01
-T:  011
-T2: 11
-#+end_example
+ * 01 (T1)
+ * 011 (T)
+ * 11 (T2)
 
 Example 2: T1 is longer than T2, so we add "1" to T1 per Rule 2:
 
-#+begin_example
-T1: 10101
-T:  101011
-T2: 111
-#+end_example
+ * 10101 (T1)
+ * 101011 (T)
+ * 111 (T2)
 
-Example: T1 is shorter than T2, so we replace the final "1" of T2 with
+Example 3: T1 is shorter than T2, so we replace the final "1" of T2 with
 "01" per Rule 3:
 
-#+begin_example
-T1: 1
-T:  11001 (Rule 3)
-T2: 1101
-#+end_example
+ * 1 (T1)
+ * 11001 (T)
+ * 1101 (T2)
