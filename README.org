@@ -1,12 +1,74 @@
 * FTumbler: Extensible Lists for Filesystems
 
+Tumblers are stable positions for ordering items in lists, which
+permit the insertion of new items at any point without renumbering
+existing items.
+
 Tumblers are an idea from the mythical Xanadu project:
 
-http://en.wikipedia.org/wiki/Tumbler_(Project_Xanadu)
+http://www.udanax.com/green/febe/tumblers.html
 
-This is an implementation of tumblers for filesystems using only the
-characters 0-9 and a-z.
+This is an implementation of tumblers using strings containing only
+the characters 0-9 and a-z, making them usable as file names in
+ordinary filesystems.
 
-Early stage.  Undocumented but usable and tested.
+License: MIT.
 
-License: MIT
+** The simplest tumblers, using only 0 and 1
+
+We can build the simplest tumblers using only the characters "0" and
+"1", and the rule that a tumbler must not end with "0".
+
+To construct a new tumbler between two existing ordered tumblers T1
+and T2:
+
+ * (Rule 1) if T1 is the same length as T2: append "1" to T1
+
+ * (Rule 2) if T2 is shorter than T1: append "1" to T1
+
+ * (Rule 3) if T1 is shorter than T2: replace T2's final "1" with "01".
+
+*** Proof that we can always find a tumbler between two tumblers
+
+Assume two strings T1 and T2 containing one or more of the characters
+"0" and "1", and not ending in "0", with T1 < T2.
+
+If the two strings are the same length or T2 is shorter than T1,
+adding "1" to T1 per Rule 1 or 2 will always yield a new string T
+greater than T1 (because T has T1 as prefix but is longer) and smaller
+than T2 (because T1 is smaller than T2, and T has T1 as unchanged
+prefix).
+
+If T1 is shorter than T2, replacing the final "1" of T2 with "01" per
+Rule 3 will always yield a new string T greater than T1 (since T1 is
+shorter than T2, T2's final "1" does not influence comparison to T1)
+and smaller than T2 (because the penultimate "0" in T is smaller than
+the final "1" in T2 it is replacing).
+
+*** Examples
+
+Example 1: T1 and T2 are the same length, so we add "1" to T1 per Rule
+1:
+
+#+begin_example
+T1: 01
+T:  011
+T2: 11
+#+end_example
+
+Example 2: T1 is longer than T2, so we add "1" to T1 per Rule 2:
+
+#+begin_example
+T1: 10101
+T:  101011
+T2: 111
+#+end_example
+
+Example: T1 is shorter than T2, so we replace the final "1" of T2 with
+"01" per Rule 3:
+
+#+begin_example
+T1: 1
+T:  11001 (Rule 3)
+T2: 1101
+#+end_example
