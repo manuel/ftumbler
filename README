@@ -24,7 +24,7 @@ and T2:
 
  * (Rule 1) if T1 is the same length as T2: append "1" to T1
 
- * (Rule 2) if T2 is shorter than T1: append "1" to T1
+ * (Rule 2) if T1 is longer than T2: append "1" to T1
 
  * (Rule 3) if T1 is shorter than T2: replace T2's final "1" with "01".
 
